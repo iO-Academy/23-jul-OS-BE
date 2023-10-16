@@ -18,15 +18,14 @@ class GetUserController
         $this->userModel = $userModel;
     }
 
-    public function __invoke(RequestInterface $request, ResponseInterface $response): ResponseInterface
+    public function __invoke(RequestInterface $request, ResponseInterface $response, $args): ResponseInterface
     {
-       $user = $this->userModel->getUserById();
+       $user = $this->userModel->getUserById($args['userId']);
        $responseBody = [
            'message' => "User successfully retrieved from db",
            'status' => 200,
            'data' => $user
        ];
        return $response->withJson($responseBody);
-
     }
 }

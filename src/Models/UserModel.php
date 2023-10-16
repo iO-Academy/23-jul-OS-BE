@@ -23,11 +23,12 @@ class UserModel
         $query->setFetchMode(\PDO::FETCH_CLASS, UserEntity::class);
         return $query->fetchAll();
     }
-    public function getUserById(\PDO $db, int $userId)
+    public function getUserById(int $userId)
     {
-        $query = $db->prepare('SELECT `id`,`username`,`password`,`icon`,`theme` FROM `users` WHERE `id` = $userId' );
-        return $query->execute([$userId]);
-
+        $query = $this->db->prepare('SELECT `id`,`username`,`password`,`icon`,`theme` FROM `users` WHERE `id` = ?' );
+        $query->execute([$userId]);
+        $query->setFetchMode(\PDO::FETCH_CLASS, UserEntity::class);
+        return $query->fetch();
     }
 
 }
