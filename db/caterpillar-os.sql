@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 11.0.2-MariaDB-1:11.0.2+maria~ubu2204)
 # Database: caterpillar-os
-# Generation Time: 2023-10-16 08:52:50 +0000
+# Generation Time: 2023-10-16 09:25:52 +0000
 # ************************************************************
 
 
@@ -28,12 +28,24 @@ DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `username` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `icon` varchar(255) NOT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `icon` varchar(255) DEFAULT NULL,
   `theme` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+
+INSERT INTO `users` (`id`, `username`, `password`, `icon`, `theme`)
+VALUES
+	(1,'Alex',NULL,NULL,1),
+	(2,'Cosmin',NULL,NULL,2),
+	(3,'Colin',NULL,NULL,3),
+	(4,'Josh',NULL,NULL,4);
+
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 
