@@ -2,6 +2,8 @@
 
 namespace CaterpillarOS\Models;
 
+use CaterpillarOS\Entities\UserEntity;
+
 class UserModel
 {
     private \PDO $db;
@@ -18,7 +20,7 @@ class UserModel
     {
         $query = $this->db->prepare('SELECT `id`,`username`,`password`,`icon`,`theme` FROM `users`');
         $query->execute();
-        $query->setFetchMode(\PDO::FETCH_CLASS);
+        $query->setFetchMode(\PDO::FETCH_CLASS, UserEntity::class);
         return $query->fetchAll();
     }
     public function getUserById(\PDO $db, int $userId)
