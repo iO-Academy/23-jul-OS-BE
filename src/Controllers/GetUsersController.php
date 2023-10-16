@@ -22,7 +22,7 @@ class GetUsersController
     {
         $users = $this->userModel->getAllUsers();
         $responseBody = [
-            'message' => 'Users successfully retrieved from db ',
+            'message' => 'Users successfully retrieved from db',
             'status' => 200,
             'data' => $users
         ];
