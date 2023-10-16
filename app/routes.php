@@ -8,4 +8,5 @@ use Slim\Interfaces\RouteCollectorProxyInterface as Group;
 return function (App $app) {
     $app->get('/users', \CaterpillarOS\Controllers\GetUsersController::class);
     $app->get('/users/{userId}', \CaterpillarOS\Controllers\GetUserController::class);
+    $app->post('/checkPassword', \CaterpillarOS\Controllers\CheckPasswordController::class);
 };
