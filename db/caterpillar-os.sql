@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 11.0.2-MariaDB-1:11.0.2+maria~ubu2204)
 # Database: caterpillar-os
-# Generation Time: 2023-10-16 09:25:52 +0000
+# Generation Time: 2023-10-17 08:46:57 +0000
 # ************************************************************
 
 
@@ -39,10 +39,10 @@ LOCK TABLES `users` WRITE;
 
 INSERT INTO `users` (`id`, `username`, `password`, `icon`, `theme`)
 VALUES
-	(1,'Alex',NULL,NULL,1),
-	(2,'Cosmin',NULL,NULL,2),
-	(3,'Colin',NULL,NULL,3),
-	(4,'Josh',NULL,NULL,4);
+	(1,'Alex','password',NULL,1),
+	(2,'Cosmin',NULL,NULL,1),
+	(3,'Colin',NULL,NULL,1),
+	(4,'Josh',NULL,NULL,1);
 
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;

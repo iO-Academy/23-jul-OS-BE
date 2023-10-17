@@ -23,7 +23,7 @@ class GetUserController
 
     public function __invoke(RequestInterface $request, ResponseInterface $response, $args): ResponseInterface
     {
-        try{
+        try {
             if (!ctype_digit($args['userId'])) {
                 $responseBody = [
                     'message' => "User id must be numeric",
