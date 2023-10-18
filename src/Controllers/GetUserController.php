@@ -61,7 +61,6 @@ class GetUserController
 
             }
         } catch (\Exception $exception) {
-            // respond with error response
         }
 
        return $response->withJson($responseBody, $statusCode);

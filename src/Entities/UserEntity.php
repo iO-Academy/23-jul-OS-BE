@@ -16,7 +16,6 @@ class UserEntity implements \JsonSerializable
             "id" => $this->id,
             "username" => $this->username,
             "icon" => $this->icon,
-//            "theme" => $this->theme
         ];
     }
 }
