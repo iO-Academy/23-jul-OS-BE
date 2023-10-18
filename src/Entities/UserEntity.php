@@ -8,6 +8,8 @@ class UserEntity implements \JsonSerializable
     private string $username;
     private ?string $password;
     private ?string $icon;
+
+    private ?bool $needspassword;
     private int $theme;
 
     public function jsonSerialize(): array
@@ -16,6 +18,7 @@ class UserEntity implements \JsonSerializable
             "id" => $this->id,
             "username" => $this->username,
             "icon" => $this->icon,
+            "needspassword" => $this->needspassword,
 //            "theme" => $this->theme
         ];
     }
