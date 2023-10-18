@@ -10,12 +10,18 @@ class UserEntity implements \JsonSerializable
     private ?string $icon;
     private int $theme;
 
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+
+
     public function jsonSerialize(): array
     {
         return [
             "id" => $this->id,
             "username" => $this->username,
-            "icon" => $this->icon,
+            "icon" => $this->icon
         ];
     }
 }
