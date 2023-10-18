@@ -23,7 +23,7 @@ class UserModel
         $query->setFetchMode(\PDO::FETCH_CLASS, UserEntity::class);
         return $query->fetchAll();
     }
-    public function getUserById(int $userId)
+    public function getUserById(int $userId): UserEntity | bool
     {
         $query = $this->db->prepare('SELECT `id`,`username`,`password`,`icon`,`theme` FROM `users` WHERE `id` = ?' );
         $query->execute([$userId]);

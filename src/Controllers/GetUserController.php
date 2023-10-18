@@ -3,11 +3,10 @@
 namespace CaterpillarOS\Controllers;
 
 use CaterpillarOS\Models\UserModel;
-use mysql_xdevapi\Exception;
-use PHPUnit\Event\Code\Throwable;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use function PHPUnit\Framework\throwException;
+
 
 class GetUserController
 {
@@ -23,36 +22,47 @@ class GetUserController
 
     public function __invoke(RequestInterface $request, ResponseInterface $response, $args): ResponseInterface
     {
+        $userId = $args['userId'];
+        $statusCode = 500;
+        $responseBody = [
+            'success' => false,
+            'message' => "Unexpected error",
+            'data' => 500,
+        ];
         try {
-            if (!ctype_digit($args['userId'])) {
+            if (!ctype_digit($userId)) {
                 $responseBody = [
-                    'message' => "User id must be numeric",
+                    'success' => false,
+                    'message' => "User Id must be numeric",
                     'status' => 400,
                     'data' => []
                 ];
-            } else {
-                $user = $this->userModel->getUserById($args['userId']);
-                if($user == []) {
+                $statusCode = 400;
+            }
+            else {
+                $user = $this->userModel->getUserById($userId);
+                if(!$user){
                     $responseBody = [
-                        'message' => "Invalid user id",
+                        'success' => false,
+                        'message' => "User not found",
                         'status' => 400,
                         'data' => []
                     ];
+                    $statusCode = 400;
                 } else {
                     $responseBody = [
+                        'success' => true,
                         'message' => "User successfully retrieved from db",
                         'status' => 200,
                         'data' => $user
                     ];
+                    $statusCode = 200;
                 }
+
             }
-        } catch (\Exception $e) {
-            $responseBody = [
-                'message' => "Unexpected error",
-                'status' => 500,
-            ];
+        } catch (\Exception $exception) {
         }
 
-       return $response->withJson($responseBody);
+       return $response->withJson($responseBody, $statusCode);
     }
 }
