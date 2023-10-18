@@ -19,32 +19,31 @@ class CheckPasswordController
         $this->userModel = $userModel;
     }
 
-    public function __invoke(RequestInterface $request, ResponseInterface $response) {
+    public function __invoke(RequestInterface $request, ResponseInterface $response)
+    {
         $data = $request->getParsedBody();
         $user = $this->userModel->getUserById($data['user']);
-        if(!$user) {
+        if (!$user) {
             $responseBody = [
                 'success' => false,
                 'message' => "User not found",
-                'data' => []
+                'passwordMatch' => null
             ];
             return $response->withJson($responseBody, 400);
-        }
-        else if(!empty($user->getPassword())) {
-            $responseBody = [
-                'success' => true,
-                'message' => "User has typed the correct password",
-                'passwordMatch' => PasswordValidator::checkPassword($data['password'], $user->getPassword())
-            ];
-        }
-            else {
+        } else if (empty($user->getPassword())) {
             $responseBody = [
                 'success' => false,
-                'message' => 'User does not have password'
+                'message' => 'User does not have password',
+                'passwordMatch' => null
             ];
             return $response->withJson($responseBody, 400);
+        } else {
+            $responseBody = [
+                'success' => true,
+                'message' => 'Entered password successfully checked against the db',
+                'passwordMatch' => PasswordValidator::checkPassword($data['password'], $user->getPassword())
+            ];
+            return $response->withJson($responseBody, 200);
         }
-
-        return $response->withJson($responseBody);
-        }
+    }
 }
