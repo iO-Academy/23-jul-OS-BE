@@ -18,7 +18,7 @@ class UserModel
 
     public function getAllUsers()
     {
-        $query = $this->db->prepare('SELECT `id`,`username`,`password`,`icon`,`theme` FROM `users`');
+        $query = $this->db->prepare('SELECT `id`,`username`,`password`,`icon`,`theme`, `needspassword` FROM `users`');
         $query->execute();
         $query->setFetchMode(\PDO::FETCH_CLASS, UserEntity::class);
         return $query->fetchAll();
