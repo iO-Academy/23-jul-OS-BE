@@ -12,6 +12,12 @@ class UserEntity implements \JsonSerializable
     private ?bool $needspassword;
     private int $theme;
 
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+
+
     public function jsonSerialize(): array
     {
         return [
@@ -20,6 +26,7 @@ class UserEntity implements \JsonSerializable
             "icon" => $this->icon,
             "needspassword" => $this->needspassword,
 //            "theme" => $this->theme
+
         ];
     }
 }
